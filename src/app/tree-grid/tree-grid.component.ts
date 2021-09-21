@@ -4,20 +4,15 @@ import {
   SortSettingsModel,
   EditSettingsModel,
   ToolbarItems,
-  SelectionSettingsModel,
-  VirtualScrollService
+  SelectionSettingsModel
 } from '@syncfusion/ej2-angular-treegrid';
-import {
-  getData,
-  virtualData,
-} from '../data-source';
+import { getData, virtualData } from '../data-source';
 
 @Component({
   selector: 'app-tree-grid',
   templateUrl: './tree-grid.component.html',
   styleUrls: ['./tree-grid.component.css'],
-  encapsulation: ViewEncapsulation.None,
-  providers: [VirtualScrollService]
+  encapsulation: ViewEncapsulation.None
 })
 export class CustomTreeGridComponent implements OnInit {
   public data: Object[];
