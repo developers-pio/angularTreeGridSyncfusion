@@ -1,0 +1,66 @@
+<div class="gridWrapper">
+  <ejs-treegrid
+    #treegrid
+    height="100%"
+    width="100%"
+    [dataSource]="data"
+    [treeColumnIndex]="1"
+    childMapping="subtasks"
+    [allowResizing]="true"
+    [allowReordering]="true"
+    [allowFiltering]="true"
+    [allowSorting]="true"
+    [allowMultiSorting]="true"
+    [filterSettings]="filterSettings"
+    [sortSettings]="sortSettings"
+    [editSettings]="editSettings"
+    [toolbar]="toolbarOptions"
+    [contextMenuItems]="contextMenuItems"
+    [selectionSettings]="selectionOptions"
+    [enableVirtualization]="true"
+  >
+    <e-columns>
+      <e-column
+        field="taskID"
+        headerText="Task ID"
+        textAlign="Right"
+        isPrimaryKey="true"
+        width="150"
+      ></e-column>
+      <e-column
+        field="taskName"
+        headerText="Task Name"
+        textAlign="Left"
+        width="400"
+      ></e-column>
+      <e-column
+        field="startDate"
+        headerText="Start Date"
+        textAlign="Right"
+        format="yMd"
+      ></e-column>
+      <e-column
+        field="endDate"
+        headerText="End Date"
+        textAlign="Right"
+        format="yMd"
+      ></e-column>
+      <e-column
+        field="duration"
+        headerText="Duration"
+        textAlign="Right"
+      ></e-column>
+      <e-column
+        field="progress"
+        headerText="Progress"
+        textAlign="Right"
+      ></e-column>
+      <e-column
+        field="approved"
+        displayAsCheckBox="true"
+        headerText="Approved"
+        textAlign="Center"
+      ></e-column>
+    </e-columns>
+  </ejs-treegrid>
+</div>
