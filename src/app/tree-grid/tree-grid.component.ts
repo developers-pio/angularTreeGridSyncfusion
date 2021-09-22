@@ -23,6 +23,12 @@ export class CustomTreeGridComponent implements OnInit {
   public toolbarOptions: ToolbarItems[];
   public contextMenuItems: Object[];
   public selectionOptions: SelectionSettingsModel;
+  public dateFormatOptions: Object;
+  public dateRule: Object;
+  public numberRule: Object;
+  public editing: Object;
+  public stringRule: Object;
+  public taskidRule: Object;
 
   constructor() {}
 
@@ -39,10 +45,35 @@ export class CustomTreeGridComponent implements OnInit {
       allowEditing: true,
       allowAdding: true,
       allowDeleting: true,
+      showDeleteConfirmDialog: true,
       mode: 'Dialog'
     };
     this.toolbarOptions = ['Add', 'Edit', 'Delete'];
     this.contextMenuItems = ['Edit', 'Delete'];
     this.selectionOptions = { type: 'Multiple' };
+    this.dateFormatOptions = { format: 'M/d/yyyy', type: 'date' };
+    this.dateRule = { required: true, date: true };
+    this.numberRule = { required: true, number: true, min: 0 };
+    this.editing = { params: { format: 'n' } };
+    this.stringRule = { required: true };
+    this.taskidRule = { required: true, number: true };
+  }
+
+  customizeCell(args) {
+    if (
+      args.column.field === 'progress' &&
+      +args.cell.innerHTML > 90 &&
+      +args.cell.innerHTML <= 100
+    ) {
+      args.cell.setAttribute(
+        'style',
+        'background-color:#336c12;color:white;text-align:center;'
+      );
+    } else if (+args.cell.innerHTML > 20 && args.column.field === 'progress') {
+      args.cell.setAttribute(
+        'style',
+        'background-color:#7b2b1d;color:white;text-align:center;'
+      );
+    }
   }
 }

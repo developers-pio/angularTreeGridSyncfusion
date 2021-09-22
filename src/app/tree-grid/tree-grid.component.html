@@ -3,63 +3,84 @@
     #treegrid
     height="100%"
     width="100%"
+    childMapping="subtasks"
     [dataSource]="data"
     [treeColumnIndex]="1"
-    childMapping="subtasks"
     [allowResizing]="true"
     [allowReordering]="true"
+    [showColumnMenu]="true"
     [allowFiltering]="true"
+    [filterSettings]="filterSettings"
     [allowSorting]="true"
     [allowMultiSorting]="true"
-    [filterSettings]="filterSettings"
     [sortSettings]="sortSettings"
     [editSettings]="editSettings"
     [toolbar]="toolbarOptions"
     [contextMenuItems]="contextMenuItems"
     [selectionSettings]="selectionOptions"
     [enableVirtualization]="true"
+    (queryCellInfo)="customizeCell($event)"
   >
     <e-columns>
       <e-column
         field="taskID"
         headerText="Task ID"
-        textAlign="Right"
-        isPrimaryKey="true"
         width="150"
+        isPrimaryKey="true"
+        [validationRules]="taskidRule"
+        hideAtMedia="(min-width: 700px)"
       ></e-column>
       <e-column
         field="taskName"
         headerText="Task Name"
-        textAlign="Left"
         width="400"
+        clipMode="EllipsisWithTooltip"
+        editType="stringedit"
+        [validationRules]="stringRule"
+      ></e-column>
+      <e-column
+        field="priority"
+        headerText="Priority"
+        editType="dropdownedit"
+        [validationRules]="stringRule"
       ></e-column>
       <e-column
         field="startDate"
         headerText="Start Date"
-        textAlign="Right"
-        format="yMd"
+        [format]="dateFormatOptions"
+        editType="datepickeredit"
+        [validationRules]="dateRule"
       ></e-column>
       <e-column
         field="endDate"
         headerText="End Date"
-        textAlign="Right"
-        format="yMd"
+        [format]="dateFormatOptions"
+        editType="datepickeredit"
+        [validationRules]="dateRule"
       ></e-column>
       <e-column
         field="duration"
         headerText="Duration"
-        textAlign="Right"
+        textAlign="Center"
+        editType="numericedit"
+        [edit]="editing"
+        [validationRules]="numberRule"
       ></e-column>
       <e-column
         field="progress"
         headerText="Progress"
-        textAlign="Right"
+        textAlign="Center"
+        editType="numericedit"
+        [edit]="editing"
+        [validationRules]="numberRule"
       ></e-column>
       <e-column
         field="approved"
-        displayAsCheckBox="true"
         headerText="Approved"
         textAlign="Center"
+        displayAsCheckBox="true"
+        editType="booleanedit"
+        type="boolean"
       ></e-column>
     </e-columns>
   </ejs-treegrid>
