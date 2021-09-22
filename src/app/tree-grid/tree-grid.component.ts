@@ -28,7 +28,8 @@ export class CustomTreeGridComponent implements OnInit {
   public numberRule: Object;
   public editing: Object;
   public stringRule: Object;
-  public taskidRule: Object;
+  public taskIdRule: Object;
+  public pageSettings: Object;
 
   constructor() {}
 
@@ -56,7 +57,8 @@ export class CustomTreeGridComponent implements OnInit {
     this.numberRule = { required: true, number: true, min: 0 };
     this.editing = { params: { format: 'n' } };
     this.stringRule = { required: true };
-    this.taskidRule = { required: true, number: true };
+    this.taskIdRule = { required: true, number: true };
+    this.pageSettings = {pageSize: 30};
   }
 
   customizeCell(args) {

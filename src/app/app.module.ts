@@ -10,7 +10,7 @@ import {
   ResizeService,
   ReorderService,
   ContextMenuService,
-  VirtualScrollService,
+  InfiniteScrollService,
   ColumnMenuService
 } from '@syncfusion/ej2-angular-treegrid';
 
@@ -29,7 +29,7 @@ import { CustomTreeGridComponent } from './tree-grid/tree-grid.component';
     ResizeService,
     ReorderService,
     ContextMenuService,
-    VirtualScrollService,
+    InfiniteScrollService,
     ColumnMenuService
   ],
   bootstrap: [AppComponent]

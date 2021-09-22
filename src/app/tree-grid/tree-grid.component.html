@@ -3,8 +3,10 @@
     #treegrid
     height="100%"
     width="100%"
+    rowHeight="40"
     childMapping="subtasks"
     [dataSource]="data"
+    [frozenColumns]="2"
     [treeColumnIndex]="1"
     [allowResizing]="true"
     [allowReordering]="true"
@@ -18,22 +20,21 @@
     [toolbar]="toolbarOptions"
     [contextMenuItems]="contextMenuItems"
     [selectionSettings]="selectionOptions"
-    [enableVirtualization]="true"
     (queryCellInfo)="customizeCell($event)"
+    [enableInfiniteScrolling]="true"
+    [pageSettings]="pageSettings"
   >
     <e-columns>
       <e-column
         field="taskID"
         headerText="Task ID"
-        width="150"
         isPrimaryKey="true"
-        [validationRules]="taskidRule"
+        [validationRules]="taskIdRule"
         hideAtMedia="(min-width: 700px)"
       ></e-column>
       <e-column
         field="taskName"
         headerText="Task Name"
-        width="400"
         clipMode="EllipsisWithTooltip"
         editType="stringedit"
         [validationRules]="stringRule"
