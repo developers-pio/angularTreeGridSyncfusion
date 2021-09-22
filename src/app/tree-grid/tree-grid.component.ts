@@ -6,6 +6,8 @@ import {
   ToolbarItems,
   SelectionSettingsModel
 } from '@syncfusion/ej2-angular-treegrid';
+import { QueryCellInfoEventArgs } from '@syncfusion/ej2-grids';
+import { addClass } from '@syncfusion/ej2-base';
 import { getData, virtualData } from '../data-source';
 
 @Component({
@@ -38,7 +40,7 @@ export class CustomTreeGridComponent implements OnInit {
       getData(1000);
     }
     this.data = virtualData;
-    this.filterSettings = { type: 'Menu' };
+    this.filterSettings = { type: 'Excel' };
     this.sortSettings = {
       columns: [{ field: 'taskID', direction: 'Ascending' }]
     };
@@ -58,24 +60,25 @@ export class CustomTreeGridComponent implements OnInit {
     this.editing = { params: { format: 'n' } };
     this.stringRule = { required: true };
     this.taskIdRule = { required: true, number: true };
-    this.pageSettings = {pageSize: 30};
+    this.pageSettings = { pageSize: 30 };
   }
 
-  customizeCell(args) {
-    if (
-      args.column.field === 'progress' &&
-      +args.cell.innerHTML > 90 &&
-      +args.cell.innerHTML <= 100
-    ) {
-      args.cell.setAttribute(
-        'style',
-        'background-color:#336c12;color:white;text-align:center;'
-      );
-    } else if (+args.cell.innerHTML > 20 && args.column.field === 'progress') {
-      args.cell.setAttribute(
-        'style',
-        'background-color:#7b2b1d;color:white;text-align:center;'
-      );
+  customizeCell(args: QueryCellInfoEventArgs) {
+    if (args.column.field === 'progress') {
+      if (args.data[args.column.field] <= 4) {
+        addClass([args.cell.querySelector('.bar')], ['progressdisable']);
+      }
+      (args.cell.querySelector('.bar') as HTMLElement).style.width =
+        args.data[args.column.field] + '%';
+      args.cell.querySelector('.barlabel').textContent =
+        args.data[args.column.field] + '%';
+    }
+    if (args.column.field === 'duration') {
+      if (+args.cell.innerHTML <= 1) {
+        args.cell.innerHTML = args.cell.innerHTML + ' hr';
+      } else {
+        args.cell.innerHTML = args.cell.innerHTML + ' hrs';
+      }
     }
   }
 }
