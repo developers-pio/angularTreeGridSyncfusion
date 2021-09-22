@@ -15,7 +15,6 @@
     [filterSettings]="filterSettings"
     [allowSorting]="true"
     [allowMultiSorting]="true"
-    [sortSettings]="sortSettings"
     [editSettings]="editSettings"
     [toolbar]="toolbarOptions"
     [contextMenuItems]="contextMenuItems"
@@ -23,6 +22,8 @@
     (queryCellInfo)="customizeCell($event)"
     [enableInfiniteScrolling]="true"
     [pageSettings]="pageSettings"
+    [allowRowDragAndDrop]="true"
+    [rowDropSettings]="rowDrop"
   >
     <e-columns>
       <e-column

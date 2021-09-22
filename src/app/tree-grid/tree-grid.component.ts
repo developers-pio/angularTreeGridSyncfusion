@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import {
+  TreeGridComponent,
   FilterSettingsModel,
-  SortSettingsModel,
   EditSettingsModel,
   ToolbarItems,
   SelectionSettingsModel
@@ -17,10 +17,12 @@ import { getData, virtualData } from '../data-source';
   encapsulation: ViewEncapsulation.None
 })
 export class CustomTreeGridComponent implements OnInit {
+  @ViewChild('treegrid')
+  public treegrid: TreeGridComponent;
+
   public data: Object[];
   public filterSettings: FilterSettingsModel;
   public item: number[] = [1, 2, 3, 4, 5];
-  public sortSettings: SortSettingsModel;
   public editSettings: EditSettingsModel;
   public toolbarOptions: ToolbarItems[];
   public contextMenuItems: Object[];
@@ -32,6 +34,7 @@ export class CustomTreeGridComponent implements OnInit {
   public stringRule: Object;
   public taskIdRule: Object;
   public pageSettings: Object;
+  public rowDrop: Object;
 
   constructor() {}
 
@@ -41,17 +44,14 @@ export class CustomTreeGridComponent implements OnInit {
     }
     this.data = virtualData;
     this.filterSettings = { type: 'Excel' };
-    this.sortSettings = {
-      columns: [{ field: 'taskID', direction: 'Ascending' }]
-    };
     this.editSettings = {
       allowEditing: true,
       allowAdding: true,
       allowDeleting: true,
       showDeleteConfirmDialog: true,
-      mode: 'Dialog'
+      mode: 'Dialog' // 'Batch' for saving multiple edit or delete actions
     };
-    this.toolbarOptions = ['Add', 'Edit', 'Delete'];
+    this.toolbarOptions = ['Add', 'Edit', 'Delete', 'Update', 'Cancel'];
     this.contextMenuItems = ['Edit', 'Delete'];
     this.selectionOptions = { type: 'Multiple' };
     this.dateFormatOptions = { format: 'M/d/yyyy', type: 'date' };
