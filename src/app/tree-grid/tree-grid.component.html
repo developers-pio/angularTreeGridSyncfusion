@@ -14,10 +14,13 @@
     [allowFiltering]="true"
     [filterSettings]="filterSettings"
     [allowSorting]="true"
-    [allowMultiSorting]="true"
+    [allowMultiSorting]="allowMultiSorting"
     [editSettings]="editSettings"
     [toolbar]="toolbarOptions"
+    [columnMenuItems]="columnMenuItems"
+    (columnMenuClick)="columnMenuClick($event)"
     [contextMenuItems]="contextMenuItems"
+    (contextMenuClick)="contextMenuClick($event)"
     [selectionSettings]="selectionSettings"
     (queryCellInfo)="customizeCell($event)"
     [enableInfiniteScrolling]="true"
@@ -31,6 +34,7 @@
         headerText="Task ID"
         isPrimaryKey="true"
         [validationRules]="taskIdRule"
+        width="120"
         hideAtMedia="(min-width: 700px)"
       ></e-column>
       <e-column
@@ -38,6 +42,7 @@
         headerText="Task Name"
         clipMode="EllipsisWithTooltip"
         editType="stringedit"
+        width="250"
         [validationRules]="stringRule"
       ></e-column>
       <e-column

@@ -62,3 +62,19 @@
   text-align: center;
   width: 60px;
 }
+
+.e-sort::before {
+  content: '\e612';
+}
+.e-select-all::before {
+  content: '\e611';
+}
+.e-cut-record::before {
+  content: '\e604';
+}
+.e-copy-record::before {
+  content: '\e33d';
+}
+.e-paste-record::before {
+  content: '\e355';
+}
