@@ -26,7 +26,7 @@ export class CustomTreeGridComponent implements OnInit {
   public editSettings: EditSettingsModel;
   public toolbarOptions: ToolbarItems[];
   public contextMenuItems: Object[];
-  public selectionOptions: SelectionSettingsModel;
+  public selectionSettings: SelectionSettingsModel;
   public dateFormatOptions: Object;
   public dateRule: Object;
   public numberRule: Object;
@@ -53,7 +53,7 @@ export class CustomTreeGridComponent implements OnInit {
     };
     this.toolbarOptions = ['Add', 'Edit', 'Delete', 'Update', 'Cancel'];
     this.contextMenuItems = ['Edit', 'Delete'];
-    this.selectionOptions = { type: 'Multiple' };
+    this.selectionSettings = { type: 'Multiple' };
     this.dateFormatOptions = { format: 'M/d/yyyy', type: 'date' };
     this.dateRule = { required: true, date: true };
     this.numberRule = { required: true, number: true, min: 0 };
