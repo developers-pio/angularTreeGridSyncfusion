@@ -45,7 +45,20 @@
         headerText="Priority"
         editType="dropdownedit"
         [validationRules]="stringRule"
-      ></e-column>
+        ><ng-template #template let-data>
+          <div
+            *ngIf="data.priority === 'Normal'; else priorityTemplate"
+            class="priority normal"
+          >
+            <span class="priorityText normal">{{ data.priority }}</span>
+          </div>
+          <ng-template #priorityTemplate>
+            <div class="priority high">
+              <span class="priorityText high">{{ data.priority }}</span>
+            </div>
+          </ng-template>
+        </ng-template>
+      </e-column>
       <e-column
         field="startDate"
         headerText="Start Date"

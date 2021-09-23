@@ -33,3 +33,32 @@
 .highcontrast .e-grid #myProgress {
   background-color: black;
 }
+
+.priority.high {
+  background-color: #ffd7cc;
+}
+
+.priority.normal {
+  background-color: #ccffcc;
+}
+
+.priorityText {
+  top: 12px;
+  position: relative;
+}
+
+.priorityText.normal {
+  color: #00cc00;
+}
+
+.priorityText.high {
+  color: #e60000;
+}
+
+.priority {
+  position: relative;
+  height: 24px;
+  border-radius: 5px;
+  text-align: center;
+  width: 60px;
+}
