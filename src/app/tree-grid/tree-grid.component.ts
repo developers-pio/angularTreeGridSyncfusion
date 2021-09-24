@@ -65,14 +65,14 @@ export class CustomTreeGridComponent implements OnInit {
       mode: 'Dialog' // 'Batch' for saving multiple edit or delete actions
     };
     this.toolbarOptions = ['Add', 'Edit', 'Delete', 'Update', 'Cancel'];
-    this.allowMultiSorting = false;
+    this.allowMultiSorting = true;
     this.columnMenuItems = [
       'ColumnChooser',
       'Filter',
       {
         iconCss: 'e-icons e-sort',
         text: 'Multi-Sort On/Off',
-        target: '.e-content',
+        target: '.e-headercontent',
         id: 'multiSortToggle'
       }
     ];
@@ -104,7 +104,7 @@ export class CustomTreeGridComponent implements OnInit {
         id: 'recordPaste'
       }
     ];
-    this.selectionSettings = { enableToggle: true };
+    this.selectionSettings = { type: 'Single' };
     this.dateFormatOptions = { format: 'M/d/yyyy', type: 'date' };
     this.dateRule = { required: true, date: true };
     this.numberRule = { required: true, number: true, min: 0 };
@@ -135,22 +135,16 @@ export class CustomTreeGridComponent implements OnInit {
 
   columnMenuClick(args?: ColumnMenuClickEventArgs): void {
     if (args.item.id === 'multiSortToggle') {
-      if (this.allowMultiSorting) {
-        this.allowMultiSorting = false;
-      } else {
-        this.allowMultiSorting = true;
-      }
+      this.allowMultiSorting = !this.allowMultiSorting;
     }
   }
 
   contextMenuClick(args?: MenuEventArgs): void {
     console.log(args);
     if (args.item.id === 'multiSelectToggle') {
-      if (this.selectionSettings.type === 'Multiple') {
-        this.selectionSettings = { type: 'Single' };
-      } else {
-        this.selectionSettings = { type: 'Multiple' };
-      }
+      this.selectionSettings.type === 'Multiple'
+        ? (this.selectionSettings = { type: 'Single' })
+        : (this.selectionSettings = { type: 'Multiple' });
     }
     if (args.item.id === 'recordCopy') {
       // this.treeGridObj.copy();
