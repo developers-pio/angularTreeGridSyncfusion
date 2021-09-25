@@ -67,6 +67,14 @@
   content: '\e612';
 }
 
+.e-freeze::before {
+  content: '\e21e';
+}
+
+.e-filter::before {
+  content: '\e251';
+}
+
 .e-select-all::before {
   content: '\e611';
 }

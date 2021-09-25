@@ -6,12 +6,12 @@
     rowHeight="40"
     childMapping="subtasks"
     [dataSource]="data"
-    [frozenColumns]="2"
+    [frozenColumns]="frozenColumns"
     [treeColumnIndex]="1"
     [allowResizing]="true"
     [allowReordering]="true"
     [showColumnMenu]="true"
-    [allowFiltering]="true"
+    [allowFiltering]="allowFiltering"
     [filterSettings]="filterSettings"
     [allowSorting]="true"
     [allowMultiSorting]="allowMultiSorting"
@@ -53,12 +53,12 @@
         [validationRules]="stringRule"
         ><ng-template #template let-data>
           <div
-            *ngIf="data.priority === 'Normal'; else priorityTemplate"
+            *ngIf="data.priority === 'Normal'; else highPriority"
             class="priority normal"
           >
             <span class="priorityText normal">{{ data.priority }}</span>
           </div>
-          <ng-template #priorityTemplate>
+          <ng-template #highPriority>
             <div class="priority high">
               <span class="priorityText high">{{ data.priority }}</span>
             </div>
@@ -107,9 +107,8 @@
         field="approved"
         headerText="Approved"
         textAlign="Center"
-        displayAsCheckBox="true"
         editType="booleanedit"
-        type="boolean"
+        [displayAsCheckBox]="true"
       ></e-column>
     </e-columns>
   </ejs-treegrid>

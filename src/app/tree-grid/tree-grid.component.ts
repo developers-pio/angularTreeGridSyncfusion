@@ -10,6 +10,7 @@ import {
   QueryCellInfoEventArgs,
   ColumnMenuClickEventArgs
 } from '@syncfusion/ej2-grids';
+import { IEditCell } from '@syncfusion/ej2-angular-grids';
 import { addClass } from '@syncfusion/ej2-base';
 import { getData, virtualData } from '../data-source';
 
@@ -26,17 +27,20 @@ export class CustomTreeGridComponent implements OnInit {
   public data: Object[];
   public filterSettings: FilterSettingsModel;
   public item: number[] = [1, 2, 3, 4, 5];
+  public frozenColumns: number;
+  public allowColumnFreezing: Boolean;
   public editSettings: EditSettingsModel;
   public toolbarOptions: ToolbarItems[];
   public contextMenuItems: Object[];
   public columnMenuItems: Object[];
   public allowMultiSorting: Boolean;
+  public allowFiltering: Boolean;
   public areAllCollapsed: Boolean;
   public selectionSettings: SelectionSettingsModel;
   public dateFormatOptions: Object;
   public dateRule: Object;
   public numberRule: Object;
-  public editing: Object;
+  public editing: IEditCell;
   public stringRule: Object;
   public taskIdRule: Object;
   public pageSettings: Object;
@@ -53,7 +57,10 @@ export class CustomTreeGridComponent implements OnInit {
       getData(1000);
     }
     this.data = virtualData;
-    this.filterSettings = { type: 'Excel', hierarchyMode: 'None'};
+    this.frozenColumns = 2;
+    this.allowColumnFreezing = true;
+    this.allowFiltering = true;
+    this.filterSettings = { type: 'Excel', hierarchyMode: 'Parent' };
     this.editSettings = {
       allowEditing: true,
       allowAdding: true,
@@ -67,6 +74,18 @@ export class CustomTreeGridComponent implements OnInit {
     this.columnMenuItems = [
       'ColumnChooser',
       'Filter',
+      {
+        iconCss: 'e-icons e-filter',
+        text: 'Filter On/Off',
+        target: '.e-headercontent',
+        id: 'filterToggle'
+      },
+      {
+        iconCss: 'e-icons e-freeze',
+        text: 'Freeze On/Off',
+        target: '.e-headercontent',
+        id: 'freezeToggle'
+      },
       {
         iconCss: 'e-icons e-sort',
         text: 'Multi-Sort On/Off',
@@ -112,7 +131,9 @@ export class CustomTreeGridComponent implements OnInit {
     this.dateFormatOptions = { format: 'MM/dd/yyyy', type: 'date' };
     this.dateRule = { required: true, date: true };
     this.numberRule = { required: true, number: true, min: 0 };
-    this.editing = { params: { format: 'n' } };
+    this.editing = {
+      params: { format: 'N', validateDecimalOnType: true, decimals: 0 }
+    };
     this.stringRule = { required: true };
     this.taskIdRule = { required: true, number: true };
     this.pageSettings = { pageSize: 30 };
@@ -141,6 +162,25 @@ export class CustomTreeGridComponent implements OnInit {
     if (args.item.id === 'multiSortToggle') {
       this.allowMultiSorting = !this.allowMultiSorting;
     }
+
+    if (args.item.id === 'filterToggle') {
+      this.allowFiltering = !this.allowFiltering;
+    }
+
+    if (args.item.id === 'freezeToggle') {
+      const currentColumnIndex = args.column.index;
+      if(this.allowColumnFreezing){
+        if(this.frozenColumns === currentColumnIndex){
+          this.allowColumnFreezing = !this.allowColumnFreezing;
+          this.frozenColumns = 0;
+        } else{
+          this.frozenColumns = currentColumnIndex;
+        }
+      } else {
+        this.allowColumnFreezing = !this.allowColumnFreezing;
+        this.frozenColumns = currentColumnIndex;
+      }
+    }
   }
 
   contextMenuClick(args): void {
@@ -151,10 +191,10 @@ export class CustomTreeGridComponent implements OnInit {
     }
 
     if (args.item.id === 'collapseExpandToggle') {
-      if(this.areAllCollapsed){
+      if (this.areAllCollapsed) {
         this.treeGridObj.expandAll();
         this.areAllCollapsed = false;
-      } else{
+      } else {
         this.treeGridObj.collapseAll();
         this.areAllCollapsed = true;
       }
@@ -171,7 +211,7 @@ export class CustomTreeGridComponent implements OnInit {
 
     if (args.item.id === 'recordPasteAsSibling') {
       // const selectedRecord = this.treeGridObj.getSelectedRecords()[0]
-      console.log(args)
+      console.log(args);
       // this.treeGridObj.addRecord(this.copiedRecords[0].taskData, args.rowInfo.rowData.index)
     }
   }
