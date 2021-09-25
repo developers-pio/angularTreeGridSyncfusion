@@ -72,6 +72,29 @@ export class CustomTreeGridComponent implements OnInit {
     this.allowMultiSorting = true;
     this.areAllCollapsed = false;
     this.columnMenuItems = [
+      {
+        text: 'Text Alignment',
+        items: [
+          {
+            iconCss: 'e-icons e-align-left',
+            text: 'Left',
+            target: '.e-headercontent',
+            id: 'alignLeft'
+          },
+          {
+            iconCss: 'e-icons e-align-center',
+            text: 'Center',
+            target: '.e-headercontent',
+            id: 'alignCenter'
+          },
+          {
+            iconCss: 'e-icons e-align-right',
+            text: 'Right',
+            target: '.e-headercontent',
+            id: 'alignRight'
+          }
+        ]
+      },
       'ColumnChooser',
       'Filter',
       {
@@ -169,17 +192,32 @@ export class CustomTreeGridComponent implements OnInit {
 
     if (args.item.id === 'freezeToggle') {
       const currentColumnIndex = args.column.index;
-      if(this.allowColumnFreezing){
-        if(this.frozenColumns === currentColumnIndex){
+      if (this.allowColumnFreezing) {
+        if (this.frozenColumns === currentColumnIndex) {
           this.allowColumnFreezing = !this.allowColumnFreezing;
           this.frozenColumns = 0;
-        } else{
+        } else {
           this.frozenColumns = currentColumnIndex;
         }
       } else {
         this.allowColumnFreezing = !this.allowColumnFreezing;
         this.frozenColumns = currentColumnIndex;
       }
+    }
+
+    if (args.item.id === 'alignLeft') {
+      this.treeGridObj.getColumnByField(args.column.field).textAlign = 'Left';
+      this.treeGridObj.refreshColumns();
+    }
+
+    if (args.item.id === 'alignCenter') {
+      this.treeGridObj.getColumnByField(args.column.field).textAlign = 'Center';
+      this.treeGridObj.refreshColumns();
+    }
+
+    if (args.item.id === 'alignRight') {
+      this.treeGridObj.getColumnByField(args.column.field).textAlign = 'Right';
+      this.treeGridObj.refreshColumns();
     }
   }
 

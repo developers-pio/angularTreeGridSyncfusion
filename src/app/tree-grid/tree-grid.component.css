@@ -56,11 +56,24 @@
 }
 
 .priority {
+  display: inline-block;
   position: relative;
   height: 24px;
   border-radius: 5px;
   text-align: center;
   width: 60px;
+}
+
+.e-align-left::before {
+  content: '\ec12';
+}
+
+.e-align-center::before {
+  content: '\e35e';
+}
+
+.e-align-right::before {
+  content: '\eb5f';
 }
 
 .e-sort::before {
