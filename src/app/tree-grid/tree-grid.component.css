@@ -66,15 +66,32 @@
 .e-sort::before {
   content: '\e612';
 }
+
 .e-select-all::before {
   content: '\e611';
 }
+
+.e-collapse-all::before {
+  content: '\e554';
+}
+
 .e-cut-record::before {
   content: '\e604';
 }
+
 .e-copy-record::before {
   content: '\e33d';
 }
+
 .e-paste-record::before {
   content: '\e355';
+}
+
+.e-row.e-altrow td {
+  background-color: #f9f9f9;
+}
+
+.e-grid td.e-active,
+.e-grid.e-altrow td.e-active {
+  background: #e4ecff;
 }

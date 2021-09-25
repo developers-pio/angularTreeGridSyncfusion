@@ -22,7 +22,6 @@
     "@syncfusion/ej2-angular-treegrid": "^19.2.60",
     "@syncfusion/ej2-base": "^19.2.60",
     "@syncfusion/ej2-grids": "^19.2.62",
-    "@syncfusion/ej2-navigations": "^19.2.62",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

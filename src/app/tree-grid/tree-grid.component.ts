@@ -11,7 +11,6 @@ import {
   ColumnMenuClickEventArgs
 } from '@syncfusion/ej2-grids';
 import { addClass } from '@syncfusion/ej2-base';
-import { MenuEventArgs } from '@syncfusion/ej2-navigations';
 import { getData, virtualData } from '../data-source';
 
 @Component({
@@ -32,6 +31,7 @@ export class CustomTreeGridComponent implements OnInit {
   public contextMenuItems: Object[];
   public columnMenuItems: Object[];
   public allowMultiSorting: Boolean;
+  public areAllCollapsed: Boolean;
   public selectionSettings: SelectionSettingsModel;
   public dateFormatOptions: Object;
   public dateRule: Object;
@@ -42,12 +42,9 @@ export class CustomTreeGridComponent implements OnInit {
   public pageSettings: Object;
   public rowDrop: Object;
 
+  public recordsToDelete: Object[];
+  public copiedRecords: Object[];
   public selectedRecords: Object[];
-
-  // Cut
-  private moveRow: any = null;
-  // Copy/Paste
-  private clone: any = null;
 
   constructor() {}
 
@@ -56,7 +53,7 @@ export class CustomTreeGridComponent implements OnInit {
       getData(1000);
     }
     this.data = virtualData;
-    this.filterSettings = { type: 'Excel' };
+    this.filterSettings = { type: 'Menu', hierarchyMode: 'None'};
     this.editSettings = {
       allowEditing: true,
       allowAdding: true,
@@ -66,6 +63,7 @@ export class CustomTreeGridComponent implements OnInit {
     };
     this.toolbarOptions = ['Add', 'Edit', 'Delete', 'Update', 'Cancel'];
     this.allowMultiSorting = true;
+    this.areAllCollapsed = false;
     this.columnMenuItems = [
       'ColumnChooser',
       'Filter',
@@ -77,20 +75,26 @@ export class CustomTreeGridComponent implements OnInit {
       }
     ];
     this.contextMenuItems = [
-      'Edit',
-      'Delete',
+      {
+        iconCss: 'e-icons e-collapse-all',
+        text: 'Collapse/Expand All',
+        target: '.e-content',
+        id: 'collapseExpandToggle'
+      },
       {
         iconCss: 'e-icons e-select-all',
         text: 'Multi-Select On/Off',
         target: '.e-content',
         id: 'multiSelectToggle'
       },
-      {
-        iconCss: 'e-icons e-cut-record',
-        text: 'Cut',
-        target: '.e-content',
-        id: 'recordCut'
-      },
+      'Edit',
+      'Delete',
+      // {
+      //   iconCss: 'e-icons e-cut-record',
+      //   text: 'Cut',
+      //   target: '.e-content',
+      //   id: 'recordCut'
+      // },
       {
         iconCss: 'e-icons e-copy-record',
         text: 'Copy',
@@ -99,9 +103,9 @@ export class CustomTreeGridComponent implements OnInit {
       },
       {
         iconCss: 'e-icons e-paste-record',
-        text: 'Paste',
+        text: 'Paste as Sibling',
         target: '.e-content',
-        id: 'recordPaste'
+        id: 'recordPasteAsSibling'
       }
     ];
     this.selectionSettings = { type: 'Single' };
@@ -139,21 +143,36 @@ export class CustomTreeGridComponent implements OnInit {
     }
   }
 
-  contextMenuClick(args?: MenuEventArgs): void {
-    console.log(args);
+  contextMenuClick(args): void {
     if (args.item.id === 'multiSelectToggle') {
       this.selectionSettings.type === 'Multiple'
         ? (this.selectionSettings = { type: 'Single' })
         : (this.selectionSettings = { type: 'Multiple' });
     }
-    if (args.item.id === 'recordCopy') {
-      // this.treeGridObj.copy();
-      this.selectedRecords = this.treeGridObj.getSelectedRecords();
+
+    if (args.item.id === 'collapseExpandToggle') {
+      if(this.areAllCollapsed){
+        this.treeGridObj.expandAll();
+        this.areAllCollapsed = false;
+      } else{
+        this.treeGridObj.collapseAll();
+        this.areAllCollapsed = true;
+      }
     }
 
-    if (args.item.id === 'recordPaste') {
-      console.log(this.selectedRecords);
-      // this.treeGridObj.paste(dataToPaste);
+    // if (args.item.id === 'recordCut') {
+    //   this.recordsToDelete = this.treeGridObj.getSelectedRecords();
+    //   console.log(this.recordsToDelete)
+    // }
+
+    if (args.item.id === 'recordCopy') {
+      this.copiedRecords = this.treeGridObj.getSelectedRecords();
+    }
+
+    if (args.item.id === 'recordPasteAsSibling') {
+      // const selectedRecord = this.treeGridObj.getSelectedRecords()[0]
+      console.log(args)
+      // this.treeGridObj.addRecord(this.copiedRecords[0].taskData, args.rowInfo.rowData.index)
     }
   }
 }
