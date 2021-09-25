@@ -69,12 +69,14 @@
         field="startDate"
         headerText="Start Date"
         [format]="dateFormatOptions"
+        type="date"
         editType="datepickeredit"
         [validationRules]="dateRule"
       ></e-column>
       <e-column
         field="endDate"
         headerText="End Date"
+        type="date"
         [format]="dateFormatOptions"
         editType="datepickeredit"
         [validationRules]="dateRule"

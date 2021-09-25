@@ -53,7 +53,7 @@ export class CustomTreeGridComponent implements OnInit {
       getData(1000);
     }
     this.data = virtualData;
-    this.filterSettings = { type: 'Menu', hierarchyMode: 'None'};
+    this.filterSettings = { type: 'Excel', hierarchyMode: 'None'};
     this.editSettings = {
       allowEditing: true,
       allowAdding: true,
