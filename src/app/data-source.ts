@@ -29,6 +29,7 @@ export function getData(dataCount?: number): object {
       start.getTime() + Math.random() * (end.getTime() - start.getTime())
     );
   }
+
   let priority: string[] = ['Normal', 'High'];
   let approved: boolean[] = [true, false];
   if (typeof dataCount === 'string') {
@@ -48,8 +49,14 @@ export function getData(dataCount?: number): object {
         : (virtualData.length % parent) - 1;
       virtualData[num][subtasks].push({
         taskID: code++,
-        startDate: randomDate(new Date(2021, 0, 1), new Date()),
-        endDate: randomDate(new Date(2021, 5, 1), new Date()),
+        startDate: randomDate(
+          new Date('01/01/2021'),
+          new Date('06/30/2021')
+        ),
+        endDate: randomDate(
+          new Date('01/07/2021'),
+          new Date()
+        ),
         taskName: task,
         priority: priority[Math.floor(Math.random() * priority.length)],
         duration: Math.floor(Math.random() * 10),
@@ -58,8 +65,14 @@ export function getData(dataCount?: number): object {
         subtasks: [
           {
             taskID: code++,
-            startDate: randomDate(new Date(2021, 0, 1), new Date()),
-            endDate: randomDate(new Date(2021, 5, 1), new Date()),
+            startDate: randomDate(
+              new Date('01/01/2021'),
+              new Date('06/30/2021')
+            ),
+            endDate: randomDate(
+              new Date('01/07/2021'),
+              new Date()
+            ),
             taskName: getSubTaskName(task, 0),
             priority: priority[Math.floor(Math.random() * priority.length)],
             duration: Math.floor(Math.random() * 10),
@@ -68,8 +81,14 @@ export function getData(dataCount?: number): object {
           },
           {
             taskID: code++,
-            startDate: randomDate(new Date(2021, 0, 1), new Date()),
-            endDate: randomDate(new Date(2021, 5, 1), new Date()),
+            startDate: randomDate(
+              new Date('01/01/2021'),
+              new Date('06/30/2021')
+            ),
+            endDate: randomDate(
+              new Date('01/07/2021'),
+              new Date()
+            ),
             taskName: getSubTaskName(task, 1),
             priority: priority[Math.floor(Math.random() * priority.length)],
             duration: Math.floor(Math.random() * 10),
@@ -78,8 +97,14 @@ export function getData(dataCount?: number): object {
           },
           {
             taskID: code++,
-            startDate: randomDate(new Date(2021, 0, 1), new Date()),
-            endDate: randomDate(new Date(2021, 5, 1), new Date()),
+            startDate: randomDate(
+              new Date('01/01/2021'),
+              new Date('06/30/2021')
+            ),
+            endDate: randomDate(
+              new Date('01/07/2021'),
+              new Date()
+            ),
             taskName: getSubTaskName(task, 2),
             priority: priority[Math.floor(Math.random() * priority.length)],
             duration: Math.floor(Math.random() * 10),
@@ -88,8 +113,14 @@ export function getData(dataCount?: number): object {
           },
           {
             taskID: code++,
-            startDate: randomDate(new Date(2021, 0, 1), new Date()),
-            endDate: randomDate(new Date(2021, 5, 1), new Date()),
+            startDate: randomDate(
+              new Date('01/01/2021'),
+              new Date('06/30/2021')
+            ),
+            endDate: randomDate(
+              new Date('01/07/2021'),
+              new Date()
+            ),
             taskName: getSubTaskName(task, 3),
             priority: priority[Math.floor(Math.random() * priority.length)],
             duration: Math.floor(Math.random() * 10),
@@ -101,8 +132,14 @@ export function getData(dataCount?: number): object {
     } else {
       virtualData.push({
         taskID: code++,
-        startDate: randomDate(new Date(2021, 0, 1), new Date()),
-        endDate: randomDate(new Date(2021, 5, 1), new Date()),
+        startDate: randomDate(
+          new Date('01/01/2021'),
+          new Date('06/30/2021')
+        ),
+        endDate: randomDate(
+          new Date('01/07/2021'),
+          new Date()
+        ),
         taskName: task,
         priority: priority[Math.floor(Math.random() * priority.length)],
         duration: Math.floor(Math.random() * 10),

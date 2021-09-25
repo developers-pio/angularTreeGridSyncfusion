@@ -109,7 +109,7 @@ export class CustomTreeGridComponent implements OnInit {
       }
     ];
     this.selectionSettings = { type: 'Single' };
-    this.dateFormatOptions = { format: 'M/d/yyyy', type: 'date' };
+    this.dateFormatOptions = { format: 'MM/dd/yyyy', type: 'date' };
     this.dateRule = { required: true, date: true };
     this.numberRule = { required: true, number: true, min: 0 };
     this.editing = { params: { format: 'n' } };
