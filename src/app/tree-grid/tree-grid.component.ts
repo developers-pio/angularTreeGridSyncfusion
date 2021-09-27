@@ -46,10 +46,6 @@ export class CustomTreeGridComponent implements OnInit {
   public pageSettings: Object;
   public rowDrop: Object;
 
-  public recordsToDelete: Object[];
-  public copiedRecords: Object[];
-  public selectedRecords: Object[];
-
   constructor() {}
 
   ngOnInit(): void {
@@ -130,25 +126,7 @@ export class CustomTreeGridComponent implements OnInit {
         id: 'multiSelectToggle'
       },
       'Edit',
-      'Delete',
-      // {
-      //   iconCss: 'e-icons e-cut-record',
-      //   text: 'Cut',
-      //   target: '.e-content',
-      //   id: 'recordCut'
-      // },
-      {
-        iconCss: 'e-icons e-copy-record',
-        text: 'Copy',
-        target: '.e-content',
-        id: 'recordCopy'
-      },
-      {
-        iconCss: 'e-icons e-paste-record',
-        text: 'Paste as Sibling',
-        target: '.e-content',
-        id: 'recordPasteAsSibling'
-      }
+      'Delete'
     ];
     this.selectionSettings = { type: 'Single' };
     this.dateFormatOptions = { format: 'MM/dd/yyyy', type: 'date' };
@@ -236,21 +214,6 @@ export class CustomTreeGridComponent implements OnInit {
         this.treeGridObj.collapseAll();
         this.areAllCollapsed = true;
       }
-    }
-
-    // if (args.item.id === 'recordCut') {
-    //   this.recordsToDelete = this.treeGridObj.getSelectedRecords();
-    //   console.log(this.recordsToDelete)
-    // }
-
-    if (args.item.id === 'recordCopy') {
-      this.copiedRecords = this.treeGridObj.getSelectedRecords();
-    }
-
-    if (args.item.id === 'recordPasteAsSibling') {
-      // const selectedRecord = this.treeGridObj.getSelectedRecords()[0]
-      console.log(args);
-      // this.treeGridObj.addRecord(this.copiedRecords[0].taskData, args.rowInfo.rowData.index)
     }
   }
 }
